@@ -3,7 +3,7 @@ const { parse } = require('node-html-parser');
 
 const ECI_URL = 'https://results.eci.gov.in/ResultAcGenMay2026/partywiseresult-S25.htm';
 
-// 🔁 In-memory cache
+// 🔁 Cache
 let cache = null;
 let lastFetchTime = 0;
 
@@ -52,7 +52,7 @@ function getFallbackData() {
   ];
 }
 
-// 🔥 MAIN FETCH FUNCTION (with proxy)
+// 🔥 Fetch using proxy (fixes Vercel 403)
 async function fetchElectionData() {
   try {
     const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(ECI_URL)}`;
@@ -92,14 +92,14 @@ async function fetchElectionData() {
   };
 }
 
-// ✅ VERCEL API HANDLER
+// ✅ Vercel API handler
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=60');
 
   const now = Date.now();
 
-  // ⚡ 15s cache
+  // ⚡ 15 sec cache
   if (cache && now - lastFetchTime < 15000) {
     return res.status(200).json(cache);
   }
