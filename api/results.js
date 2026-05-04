@@ -72,5 +72,26 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=60');
   const data = await fetchElectionData();
-  res.status(200).json({ success: true, data });
+  res.status(200).json(data);
+};
+let cache = null;
+let lastFetchTime = 0;
+
+module.exports = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=60');
+
+  const now = Date.now();
+
+  // ✅ Cache for 15 seconds
+  if (cache && (now - lastFetchTime < 15000)) {
+    return res.status(200).json(cache);
+  }
+
+  const data = await fetchElectionData();
+
+  cache = data;
+  lastFetchTime = now;
+
+  res.status(200).json(data);
 };
