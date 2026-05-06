@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>West Bengal Elections 2026 — Live Results</title>
+<title>West Bengal Elections 2026 — Final Results</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Noto+Serif+Bengali&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -21,6 +21,7 @@
     --cpm: #E63946;
     --ajup: #2EC4B6;
     --aisf: #8AC926;
+    --inc: #4CAF50;
     --other: #9B89B4;
     --gold: #F4C542;
     --green: #22c55e;
@@ -37,7 +38,6 @@
     overflow-x: hidden;
   }
 
-  /* Animated background grid */
   body::before {
     content: '';
     position: fixed;
@@ -61,7 +61,6 @@
 
   main { position: relative; z-index: 2; }
 
-  /* HEADER */
   header {
     background: linear-gradient(135deg, #0d1117 0%, #161b26 100%);
     border-bottom: 1px solid var(--border);
@@ -90,10 +89,7 @@
     overflow: hidden;
     flex-shrink: 0;
   }
-  .india-flag span {
-    flex: 1;
-    display: block;
-  }
+  .india-flag span { flex: 1; display: block; }
   .india-flag span:nth-child(1) { background: #FF9933; }
   .india-flag span:nth-child(2) { background: #fff; }
   .india-flag span:nth-child(3) { background: #138808; }
@@ -104,37 +100,27 @@
     letter-spacing: 2px;
     color: var(--text);
   }
-
-  .header-title span {
-    color: var(--accent);
-  }
+  .header-title span { color: var(--accent); }
 
   .live-indicator {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.35);
     border-radius: 20px;
     padding: 4px 12px;
     font-size: 0.72rem;
     font-family: 'IBM Plex Mono', monospace;
-    color: var(--green);
-    font-weight: 600;
+    color: var(--bjp);
+    font-weight: 700;
     letter-spacing: 1px;
   }
 
-  .live-dot {
-    width: 7px;
-    height: 7px;
-    background: var(--green);
+  .final-dot {
+    width: 7px; height: 7px;
+    background: var(--bjp);
     border-radius: 50%;
-    animation: pulse 1.4s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
   }
 
   .header-right {
@@ -157,16 +143,8 @@
     align-items: center;
     gap: 6px;
   }
-
-  .refresh-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .refresh-btn.spinning svg {
-    animation: spin 1s linear infinite;
-  }
-
+  .refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .refresh-btn.spinning svg { animation: spin 1s linear infinite; }
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
   #lastUpdated {
@@ -175,28 +153,44 @@
     color: var(--muted);
   }
 
-  /* HERO STRIP */
+  /* WINNER BANNER */
+  .winner-banner {
+    background: linear-gradient(90deg, rgba(255,107,53,0.12) 0%, rgba(255,107,53,0.06) 50%, rgba(255,107,53,0.12) 100%);
+    border-bottom: 1px solid rgba(255,107,53,0.25);
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .winner-trophy { font-size: 1.4rem; }
+  .winner-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: var(--bjp);
+  }
+  .winner-sub {
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
   .hero-strip {
-    background: linear-gradient(90deg, 
-      rgba(255,107,53,0.08) 0%, 
-      rgba(107,141,214,0.05) 50%, 
-      rgba(255,107,53,0.08) 100%);
+    background: linear-gradient(90deg, rgba(255,107,53,0.08) 0%, rgba(107,141,214,0.05) 50%, rgba(255,107,53,0.08) 100%);
     border-bottom: 1px solid var(--border);
     padding: 1.5rem 2rem;
     text-align: center;
   }
-
   .hero-strip h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(1.8rem, 4vw, 3rem);
     letter-spacing: 3px;
     line-height: 1;
   }
-
-  .hero-strip h1 .wb {
-    color: var(--accent);
-  }
-
+  .hero-strip h1 .wb { color: var(--accent); }
   .hero-strip .subtitle {
     font-size: 0.8rem;
     color: var(--muted);
@@ -205,14 +199,12 @@
     letter-spacing: 1px;
   }
 
-  /* MAIN LAYOUT */
   .container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
   }
 
-  /* MAJORITY METER */
   .majority-meter-section {
     margin-bottom: 2rem;
     background: var(--surface);
@@ -220,7 +212,6 @@
     border-radius: 12px;
     padding: 1.5rem;
   }
-
   .meter-header {
     display: flex;
     justify-content: space-between;
@@ -230,7 +221,6 @@
     color: var(--muted);
     font-family: 'IBM Plex Mono', monospace;
   }
-
   .meter-bar-wrap {
     position: relative;
     height: 48px;
@@ -239,7 +229,6 @@
     background: var(--surface2);
     display: flex;
   }
-
   .meter-segment {
     height: 100%;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -254,41 +243,16 @@
     overflow: hidden;
     min-width: 0;
   }
+  .meter-segment-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 4px; }
+  .majority-line { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--gold); z-index: 10; }
+  .majority-label { position: absolute; top: -22px; transform: translateX(-50%); font-size: 0.65rem; color: var(--gold); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
 
-  .meter-segment-label {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 4px;
-  }
-
-  .majority-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--gold);
-    z-index: 10;
-  }
-
-  .majority-label {
-    position: absolute;
-    top: -22px;
-    transform: translateX(-50%);
-    font-size: 0.65rem;
-    color: var(--gold);
-    font-family: 'IBM Plex Mono', monospace;
-    white-space: nowrap;
-  }
-
-  /* PARTY CARDS */
   .party-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
   }
-
   .party-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -299,27 +263,20 @@
     transition: transform 0.2s, border-color 0.2s;
     cursor: default;
   }
-
-  .party-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--border2);
-  }
-
-  .party-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-  }
-
+  .party-card:hover { transform: translateY(-2px); border-color: var(--border2); }
+  .party-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
   .party-card.bjp::before { background: var(--bjp); }
   .party-card.aitc::before { background: var(--aitc); }
   .party-card.cpm::before { background: var(--cpm); }
   .party-card.ajup::before { background: var(--ajup); }
   .party-card.aisf::before { background: var(--aisf); }
+  .party-card.inc::before { background: var(--inc); }
   .party-card.other::before { background: var(--other); }
+
+  .party-card.bjp.winner-glow {
+    border-color: rgba(255,107,53,0.4);
+    box-shadow: 0 0 30px rgba(255,107,53,0.1);
+  }
 
   .party-card .party-abbr {
     font-family: 'Bebas Neue', sans-serif;
@@ -328,19 +285,18 @@
     color: var(--muted);
     margin-bottom: 0.25rem;
   }
-
   .party-card .seat-count {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3.5rem;
     line-height: 1;
     transition: all 0.3s;
   }
-
   .party-card.bjp .seat-count { color: var(--bjp); }
   .party-card.aitc .seat-count { color: var(--aitc); }
   .party-card.cpm .seat-count { color: var(--cpm); }
   .party-card.ajup .seat-count { color: var(--ajup); }
   .party-card.aisf .seat-count { color: var(--aisf); }
+  .party-card.inc .seat-count { color: var(--inc); }
   .party-card.other .seat-count { color: var(--other); }
 
   .party-card .breakdown {
@@ -350,335 +306,118 @@
     font-size: 0.72rem;
     font-family: 'IBM Plex Mono', monospace;
   }
-
-  .breakdown-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
+  .breakdown-item { display: flex; flex-direction: column; gap: 2px; }
   .breakdown-item .label { color: var(--muted); }
   .breakdown-item .val { color: var(--text); font-weight: 600; }
   .breakdown-item .val.won { color: var(--green); }
   .breakdown-item .val.leading { color: var(--gold); }
 
   .majority-tag {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(244, 197, 66, 0.15);
-    border: 1px solid rgba(244, 197, 66, 0.4);
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(244,197,66,0.15);
+    border: 1px solid rgba(244,197,66,0.4);
     color: var(--gold);
-    font-size: 0.6rem;
-    font-family: 'IBM Plex Mono', monospace;
-    padding: 2px 7px;
-    border-radius: 4px;
-    letter-spacing: 1px;
-    font-weight: 600;
+    font-size: 0.6rem; font-family: 'IBM Plex Mono', monospace;
+    padding: 2px 7px; border-radius: 4px;
+    letter-spacing: 1px; font-weight: 600;
   }
-
   .majority-tag.yes {
-    background: rgba(34, 197, 94, 0.15);
-    border-color: rgba(34, 197, 94, 0.4);
+    background: rgba(34,197,94,0.15);
+    border-color: rgba(34,197,94,0.4);
     color: var(--green);
   }
 
-  /* BOTTOM GRID */
   .bottom-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     margin-bottom: 2rem;
   }
+  @media (max-width: 900px) { .bottom-grid { grid-template-columns: 1fr; } }
 
-  @media (max-width: 900px) {
-    .bottom-grid { grid-template-columns: 1fr; }
-  }
-
-  .panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   .panel-header {
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--border);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.5rem;
   }
+  .panel-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-  .panel-header .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
+  .vote-shares { padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+  .vote-row { display: flex; flex-direction: column; gap: 4px; }
+  .vote-row-header { display: flex; justify-content: space-between; font-size: 0.75rem; }
+  .vote-row-header .party-name { color: var(--text); font-weight: 600; }
+  .vote-row-header .pct { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .bar-track { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.4,0,0.2,1); }
 
-  /* VOTE SHARE BARS */
-  .vote-shares {
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .vote-row {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .vote-row-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-  }
-
-  .vote-row-header .party-name {
-    color: var(--text);
-    font-weight: 600;
-  }
-
-  .vote-row-header .pct {
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
-  }
-
-  .bar-track {
-    height: 6px;
-    background: var(--surface2);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* TABLE */
-  .results-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
+  .results-table { width: 100%; border-collapse: collapse; }
   .results-table th {
-    padding: 0.6rem 1rem;
-    text-align: left;
-    font-size: 0.68rem;
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--border);
-    font-weight: 400;
+    padding: 0.6rem 1rem; text-align: left;
+    font-size: 0.68rem; font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+    border-bottom: 1px solid var(--border); font-weight: 400;
   }
-
   .results-table th:not(:first-child) { text-align: center; }
-
-  .results-table td {
-    padding: 0.8rem 1rem;
-    font-size: 0.82rem;
-    border-bottom: 1px solid rgba(30,37,53,0.5);
-    transition: background 0.15s;
-  }
-
+  .results-table td { padding: 0.8rem 1rem; font-size: 0.82rem; border-bottom: 1px solid rgba(30,37,53,0.5); transition: background 0.15s; }
   .results-table tr:last-child td { border-bottom: none; }
-
   .results-table tbody tr:hover td { background: var(--surface2); }
-
-  .results-table td:not(:first-child) {
-    text-align: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 600;
-  }
-
-  .party-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .party-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-
+  .results-table td:not(:first-child) { text-align: center; font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+  .party-indicator { display: flex; align-items: center; gap: 0.6rem; }
+  .party-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
   .won-val { color: var(--green); }
   .leading-val { color: var(--gold); }
   .total-val { color: var(--text); }
+  .total-row td { font-weight: 700; color: var(--accent); background: rgba(249,115,22,0.04); border-top: 1px solid var(--border); }
 
-  .total-row td {
-    font-weight: 700;
-    color: var(--accent);
-    background: rgba(249,115,22,0.04);
-    border-top: 1px solid var(--border);
-  }
-
-  /* MINI DONUT */
-  .donut-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
+  .donut-wrap { display: flex; align-items: center; justify-content: center; padding: 1.5rem; gap: 2rem; flex-wrap: wrap; }
   .donut-svg { flex-shrink: 0; }
-
-  .donut-legend {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .legend-swatch {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-
+  .donut-legend { display: flex; flex-direction: column; gap: 0.6rem; }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; }
+  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
   .legend-name { color: var(--text); }
-  .legend-seats {
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
-    font-size: 0.7rem;
-  }
+  .legend-seats { font-family: 'IBM Plex Mono', monospace; color: var(--muted); font-size: 0.7rem; }
 
-  /* COUNTDOWN / STATS STRIP */
   .stats-strip {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 2rem;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; margin-bottom: 2rem;
   }
+  .stat-cell { background: var(--surface); padding: 1rem 1.25rem; }
+  .stat-cell .stat-label { font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; }
+  .stat-cell .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; line-height: 1; }
+  .stat-cell .stat-sub { font-size: 0.65rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; margin-top: 0.2rem; }
 
-  .stat-cell {
-    background: var(--surface);
-    padding: 1rem 1.25rem;
-  }
-
-  .stat-cell .stat-label {
-    font-size: 0.65rem;
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.3rem;
-  }
-
-  .stat-cell .stat-val {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    line-height: 1;
-  }
-
-  .stat-cell .stat-sub {
-    font-size: 0.65rem;
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', monospace;
-    margin-top: 0.2rem;
-  }
-
-  /* TICKER */
   .ticker-wrap {
     background: rgba(249,115,22,0.05);
     border-top: 1px solid rgba(249,115,22,0.15);
     border-bottom: 1px solid rgba(249,115,22,0.15);
-    overflow: hidden;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
+    overflow: hidden; height: 36px;
+    display: flex; align-items: center; margin-bottom: 2rem;
   }
-
   .ticker-label {
-    background: var(--accent);
-    color: #000;
-    font-size: 0.65rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 700;
-    padding: 0 12px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    letter-spacing: 1px;
+    background: var(--bjp); color: #fff;
+    font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700; padding: 0 12px; height: 100%;
+    display: flex; align-items: center; flex-shrink: 0; letter-spacing: 1px;
   }
-
   .ticker-content {
     white-space: nowrap;
-    animation: ticker 30s linear infinite;
-    font-size: 0.75rem;
-    font-family: 'IBM Plex Mono', monospace;
-    color: var(--muted);
-    padding-left: 2rem;
+    animation: ticker 40s linear infinite;
+    font-size: 0.75rem; font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted); padding-left: 2rem;
   }
+  @keyframes ticker { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-  @keyframes ticker {
-    0% { transform: translateX(100vw); }
-    100% { transform: translateX(-100%); }
-  }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
-    text-align: center;
-    font-size: 0.7rem;
-    color: var(--muted);
-    font-family: 'IBM Plex Mono', monospace;
-    line-height: 1.8;
-  }
-
+  footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; font-size: 0.7rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; line-height: 1.8; }
   footer a { color: var(--accent); text-decoration: none; }
 
-  /* LOADING STATE */
-  .skeleton {
-    background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-  /* UPDATE FLASH */
-  @keyframes flash {
-    0% { background: rgba(249,115,22,0.1); }
-    100% { background: transparent; }
-  }
-
+  @keyframes flash { 0% { background: rgba(249,115,22,0.1); } 100% { background: transparent; } }
   .updated { animation: flash 0.8s ease-out; }
 
-  /* Responsive */
   @media (max-width: 600px) {
     header { padding: 0 1rem; }
     .container { padding: 1rem; }
@@ -696,10 +435,10 @@
   <div class="header-left">
     <div class="india-flag"><span></span><span></span><span></span></div>
     <div class="header-title">WB ELECTION <span>2026</span></div>
-    <div class="live-indicator"><div class="live-dot"></div>LIVE</div>
+    <div class="live-indicator"><div class="final-dot"></div>FINAL</div>
   </div>
   <div class="header-right">
-    <span id="lastUpdated">Loading...</span>
+    <span id="lastUpdated">04/05/2026 — Final Count</span>
     <button class="refresh-btn" id="refreshBtn" onclick="fetchData()">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
       REFRESH
@@ -708,20 +447,26 @@
 </header>
 
 <main>
+  <!-- WINNER BANNER -->
+  <div class="winner-banner">
+    <span class="winner-trophy">&#127942;</span>
+    <span class="winner-text">BJP WINS WEST BENGAL 2026 &mdash; 207 SEATS</span>
+    <span class="winner-sub">MAJORITY SECURED &nbsp;&#9670;&nbsp; 293 / 294 SEATS DECLARED</span>
+  </div>
+
   <div class="hero-strip">
-    <h1>GENERAL ELECTION · <span class="wb">WEST BENGAL</span> · 2026</h1>
-    <div class="subtitle">ASSEMBLY CONSTITUENCIES RESULTS — TOTAL 294 SEATS — MAJORITY: 148</div>
+    <h1>GENERAL ELECTION &middot; <span class="wb">WEST BENGAL</span> &middot; 2026</h1>
+    <div class="subtitle">ASSEMBLY CONSTITUENCIES — TOTAL 294 SEATS — MAJORITY: 148 &nbsp;|&nbsp; RESULTS: FINAL</div>
   </div>
 
   <div class="ticker-wrap">
-    <div class="ticker-label">▶ LIVE</div>
-    <div class="ticker-content" id="tickerContent">Loading election data...</div>
+    <div class="ticker-label">&#9654; RESULT</div>
+    <div class="ticker-content" id="tickerContent">BJP WINS WEST BENGAL 2026 WITH 207 SEATS &nbsp;&#9670;&nbsp; BJP: 207 &nbsp;&#9670;&nbsp; AITC: 80 &nbsp;&#9670;&nbsp; INC: 2 &nbsp;&#9670;&nbsp; AJUP: 2 &nbsp;&#9670;&nbsp; CPI(M): 1 &nbsp;&#9670;&nbsp; AISF: 1 &nbsp;&#9670;&nbsp; 293 OF 294 SEATS DECLARED &nbsp;&#9670;&nbsp; BJP CROSSES MAJORITY BY 59 SEATS</div>
   </div>
 
   <div class="container">
 
-    <!-- STATS STRIP -->
-    <div class="stats-strip" id="statsStrip">
+    <div class="stats-strip">
       <div class="stat-cell">
         <div class="stat-label">Total Seats</div>
         <div class="stat-val" style="color:var(--text)">294</div>
@@ -733,83 +478,61 @@
         <div class="stat-sub">Seats needed</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-label">Results In</div>
-        <div class="stat-val" id="resultsIn" style="color:var(--green)">—</div>
-        <div class="stat-sub">Declared</div>
+        <div class="stat-label">Declared</div>
+        <div class="stat-val" id="resultsIn" style="color:var(--green)">293</div>
+        <div class="stat-sub">of 294 seats</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">Pending</div>
-        <div class="stat-val" id="resultsPending" style="color:var(--accent)">—</div>
+        <div class="stat-val" id="resultsPending" style="color:var(--accent)">1</div>
         <div class="stat-sub">Awaited</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-label">Leading Party</div>
-        <div class="stat-val" id="leadingPartyAbbr" style="color:var(--bjp)">—</div>
-        <div class="stat-sub" id="leadingPartySeats">— seats</div>
+        <div class="stat-label">Winner</div>
+        <div class="stat-val" id="leadingPartyAbbr" style="color:var(--bjp)">BJP</div>
+        <div class="stat-sub" id="leadingPartySeats">207 seats</div>
       </div>
     </div>
 
-    <!-- MAJORITY METER -->
     <div class="majority-meter-section">
       <div class="meter-header">
         <span>SEAT DISTRIBUTION</span>
-        <span>◆ MAJORITY MARK: 148</span>
+        <span>&#9670; MAJORITY MARK: 148</span>
       </div>
       <div style="position:relative; padding-top: 24px;">
-        <div class="meter-bar-wrap" id="meterBar">
-          <!-- filled by JS -->
-        </div>
+        <div class="meter-bar-wrap" id="meterBar"></div>
         <div class="majority-line" id="majorityLine" style="left: 50.34%;">
-          <span class="majority-label">148 ▼</span>
+          <span class="majority-label">148 &#9660;</span>
         </div>
       </div>
     </div>
 
-    <!-- PARTY CARDS -->
-    <div class="party-cards" id="partyCards">
-      <!-- filled by JS -->
-    </div>
+    <div class="party-cards" id="partyCards"></div>
 
-    <!-- BOTTOM PANELS -->
     <div class="bottom-grid">
-
       <div class="panel">
         <div class="panel-header"><span class="dot"></span>PARTY-WISE RESULTS TABLE</div>
         <table class="results-table">
           <thead>
             <tr>
-              <th>Party</th>
-              <th>Won</th>
-              <th>Leading</th>
-              <th>Total</th>
+              <th>Party</th><th>Won</th><th>Leading</th><th>Total</th>
             </tr>
           </thead>
-          <tbody id="resultsTableBody">
-            <!-- filled by JS -->
-          </tbody>
+          <tbody id="resultsTableBody"></tbody>
         </table>
       </div>
-
       <div class="panel">
         <div class="panel-header"><span class="dot"></span>SEAT SHARE CHART</div>
         <div class="donut-wrap">
-          <svg class="donut-svg" id="donutSvg" width="200" height="200" viewBox="0 0 200 200">
-            <!-- filled by JS -->
-          </svg>
-          <div class="donut-legend" id="donutLegend">
-            <!-- filled by JS -->
-          </div>
+          <svg class="donut-svg" id="donutSvg" width="200" height="200" viewBox="0 0 200 200"></svg>
+          <div class="donut-legend" id="donutLegend"></div>
         </div>
       </div>
-
     </div>
 
-    <!-- VOTE SHARE PANEL -->
     <div class="panel" style="margin-bottom:2rem;">
       <div class="panel-header"><span class="dot"></span>SEAT SHARE — VISUAL BREAKDOWN</div>
-      <div class="vote-shares" id="voteShares">
-        <!-- filled by JS -->
-      </div>
+      <div class="vote-shares" id="voteShares"></div>
     </div>
 
   </div>
@@ -817,38 +540,55 @@
 
 <footer>
   Data sourced from <a href="https://results.eci.gov.in/" target="_blank">results.eci.gov.in</a> — Election Commission of India<br>
-  Auto-refreshes every 60 seconds · For educational/informational purposes only<br>
+  Auto-refreshes every 60 seconds &middot; For educational/informational purposes only<br>
   <span id="footerTime"></span>
 </footer>
 
 <script>
+// ── FINAL RESULTS as of 04/05/2026 (293/294 declared) ──────────────────────
+const FINAL_RESULTS = {
+  state: 'West Bengal',
+  totalAC: 294,
+  parties: [
+    { party: 'Bharatiya Janata Party - BJP',               won: 207, leading: 0, total: 207 },
+    { party: 'All India Trinamool Congress - AITC',         won: 80,  leading: 0, total: 80  },
+    { party: 'Indian National Congress - INC',              won: 2,   leading: 0, total: 2   },
+    { party: 'Aam Janata Unnayan party - AJUP',             won: 2,   leading: 0, total: 2   },
+    { party: 'Communist Party of India (Marxist) - CPI(M)', won: 1,   leading: 0, total: 1   },
+    { party: 'All India Secular Front - AISF',              won: 1,   leading: 0, total: 1   },
+  ],
+  lastUpdated: '04/05/2026 — Final Count (293/294 Declared)',
+  fetchedAt: new Date().toISOString()
+};
+
+// ── PARTY COLORS ───────────────────────────────────────────────────────────
 const PARTY_COLORS = {
-  'BJP': '#FF6B35',
-  'AITC': '#6B8DD6',
+  'BJP':    '#FF6B35',
+  'AITC':   '#6B8DD6',
   'CPI(M)': '#E63946',
-  'AJUP': '#2EC4B6',
-  'AISF': '#8AC926',
-  'INC': '#4CAF50',
-  'BSP': '#1565C0',
-  'OTHER': '#9B89B4',
+  'AJUP':   '#2EC4B6',
+  'AISF':   '#8AC926',
+  'INC':    '#4CAF50',
+  'BSP':    '#1565C0',
+  'OTHER':  '#9B89B4',
 };
 
 const PARTY_ABBR_MAP = {
-  'Bharatiya Janata Party - BJP': { abbr: 'BJP', cls: 'bjp' },
-  'All India Trinamool Congress - AITC': { abbr: 'AITC', cls: 'aitc' },
-  'Communist Party of India (Marxist) - CPI(M)': { abbr: 'CPI(M)', cls: 'cpm' },
-  'Aam Janata Unnayan party - AJUP': { abbr: 'AJUP', cls: 'ajup' },
-  'All India Secular Front - AISF': { abbr: 'AISF', cls: 'aisf' },
+  'Bharatiya Janata Party - BJP':               { abbr: 'BJP',    cls: 'bjp',   extra: 'winner-glow' },
+  'All India Trinamool Congress - AITC':         { abbr: 'AITC',   cls: 'aitc',  extra: '' },
+  'Communist Party of India (Marxist) - CPI(M)': { abbr: 'CPI(M)', cls: 'cpm',   extra: '' },
+  'Aam Janata Unnayan party - AJUP':             { abbr: 'AJUP',   cls: 'ajup',  extra: '' },
+  'All India Secular Front - AISF':              { abbr: 'AISF',   cls: 'aisf',  extra: '' },
+  'Indian National Congress - INC':              { abbr: 'INC',    cls: 'inc',   extra: '' },
 };
 
 function getAbbr(partyName) {
   for (const [key, val] of Object.entries(PARTY_ABBR_MAP)) {
     if (partyName.includes(val.abbr) || partyName === key) return val;
   }
-  // Extract abbr from "Party Name - ABBR" pattern
   const match = partyName.match(/- ([A-Z()]+)$/);
-  if (match) return { abbr: match[1], cls: 'other' };
-  return { abbr: partyName.substring(0, 4).toUpperCase(), cls: 'other' };
+  if (match) return { abbr: match[1], cls: 'other', extra: '' };
+  return { abbr: partyName.substring(0, 4).toUpperCase(), cls: 'other', extra: '' };
 }
 
 function getColor(abbr) {
@@ -857,100 +597,119 @@ function getColor(abbr) {
 
 let currentData = null;
 
+// ── LIVE FETCH (tries CORS proxies then falls back to FINAL_RESULTS) ───────
+const CORS_PROXIES = [
+  u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`,
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+];
+const ECI_URL = 'https://results.eci.gov.in/ResultAcGenMay2026/partywiseresult-S25.htm';
+
+async function tryLiveFetch() {
+  for (const proxyFn of CORS_PROXIES) {
+    try {
+      const url = proxyFn(ECI_URL);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 8000);
+      const res = await fetch(url, { signal: ctrl.signal });
+      clearTimeout(t);
+      if (!res.ok) continue;
+      let html = url.includes('allorigins.win')
+        ? (await res.json()).contents
+        : await res.text();
+      if (!html || html.length < 500) continue;
+
+      // Parse table
+      const dp = new DOMParser();
+      const doc = dp.parseFromString(html, 'text/html');
+      const parties = [];
+      doc.querySelectorAll('table tr').forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 3) {
+          const party = cells[0]?.textContent?.trim();
+          const won = parseInt(cells[1]?.textContent) || 0;
+          const leading = parseInt(cells[2]?.textContent) || 0;
+          const total = parseInt(cells[3]?.textContent) || (won + leading);
+          if (party && party.length > 3 && !['Party','Total','Won'].includes(party) && total > 0)
+            parties.push({ party, won, leading, total });
+        }
+      });
+      if (parties.length > 0) {
+        const bt = doc.body?.innerText || '';
+        const um = bt.match(/Last Updated[^\n]*/i);
+        return {
+          totalAC: 294,
+          parties: parties.sort((a, b) => b.total - a.total),
+          lastUpdated: um ? um[0].trim() : new Date().toLocaleString('en-IN'),
+          fetchedAt: new Date().toISOString()
+        };
+      }
+    } catch(e) { /* try next proxy */ }
+  }
+  return null; // all proxies failed
+}
+
 async function fetchData() {
   const btn = document.getElementById('refreshBtn');
   btn.classList.add('spinning');
-  
+
   try {
-    const res = await fetch('/api/results');
-    const json = await res.json();
-    if (json.success && json.data) {
-      renderAll(json.data);
-      currentData = json.data;
-    }
+    const live = await tryLiveFetch();
+    const data = live || FINAL_RESULTS;
+    data.fetchedAt = new Date().toISOString();
+    renderAll(data);
+    currentData = data;
   } catch (e) {
-    console.error('Fetch error:', e);
-    // Fallback to demo data
-    renderAll(getDemoData());
+    renderAll(FINAL_RESULTS);
+    currentData = FINAL_RESULTS;
   } finally {
     btn.classList.remove('spinning');
   }
 }
 
-function getDemoData() {
-  return {
-    state: 'West Bengal',
-    totalAC: 294,
-    parties: [
-      { party: 'Bharatiya Janata Party - BJP', won: 0, leading: 182, total: 182 },
-      { party: 'All India Trinamool Congress - AITC', won: 0, leading: 91, total: 91 },
-      { party: 'Aam Janata Unnayan party - AJUP', won: 0, leading: 2, total: 2 },
-      { party: 'All India Secular Front - AISF', won: 0, leading: 2, total: 2 },
-      { party: 'Communist Party of India (Marxist) - CPI(M)', won: 0, leading: 1, total: 1 },
-    ],
-    lastUpdated: 'Last Updated at 01:12 PM On 04/05/2026',
-    fetchedAt: new Date().toISOString()
-  };
-}
-
+// ── RENDER ──────────────────────────────────────────────────────────────────
 function renderAll(data) {
   const { parties, totalAC, lastUpdated, fetchedAt } = data;
   const majorityMark = Math.floor(totalAC / 2) + 1;
-  const totalSeats = parties.reduce((s, p) => s + p.total, 0);
-  const totalWon = parties.reduce((s, p) => s + p.won, 0);
-  
-  // Sort by total desc
+  const totalSeats   = parties.reduce((s, p) => s + p.total, 0);
+  const totalWon     = parties.reduce((s, p) => s + p.won,   0);
+
   const sorted = [...parties].sort((a, b) => b.total - a.total);
-  const top = sorted[0];
+  const top    = sorted[0];
   const topInfo = top ? getAbbr(top.party) : null;
 
-  // Update header time
-  document.getElementById('lastUpdated').textContent = lastUpdated?.replace('Last Updated at ', '') || '';
-  document.getElementById('footerTime').textContent = 'Last fetched: ' + new Date(fetchedAt).toLocaleString('en-IN');
+  document.getElementById('lastUpdated').textContent = (lastUpdated || '').replace('Last Updated at ', '');
+  document.getElementById('footerTime').textContent  = 'Last fetched: ' + new Date(fetchedAt).toLocaleString('en-IN');
 
-  // Stats strip
   const pending = totalAC - totalSeats;
-  document.getElementById('resultsIn').textContent = totalSeats;
+  document.getElementById('resultsIn').textContent      = totalSeats;
   document.getElementById('resultsPending').textContent = pending >= 0 ? pending : '—';
   if (topInfo) {
-    document.getElementById('leadingPartyAbbr').textContent = topInfo.abbr;
-    document.getElementById('leadingPartyAbbr').style.color = getColor(topInfo.abbr);
+    document.getElementById('leadingPartyAbbr').textContent  = topInfo.abbr;
+    document.getElementById('leadingPartyAbbr').style.color  = getColor(topInfo.abbr);
     document.getElementById('leadingPartySeats').textContent = top.total + ' seats';
   }
 
   // Ticker
   const tickerParts = sorted.map(p => {
     const { abbr } = getAbbr(p.party);
-    return `${abbr}: ${p.total} seats (Won: ${p.won} | Leading: ${p.leading})`;
+    return `${abbr}: ${p.total} (W:${p.won} L:${p.leading})`;
   });
-  tickerParts.push('MAJORITY MARK: 148 SEATS');
-  document.getElementById('tickerContent').textContent = tickerParts.join('   ·   ');
+  tickerParts.unshift('BJP WINS WB 2026');
+  tickerParts.push('MAJORITY MARK: 148 | DECLARED: ' + totalSeats + '/294');
+  document.getElementById('tickerContent').textContent = tickerParts.join('   \u25C6   ');
 
-  // Majority meter
   renderMeter(sorted, totalAC, majorityMark);
-
-  // Party cards
   renderPartyCards(sorted, majorityMark);
-
-  // Table
-  renderTable(sorted, totalSeats > 0 ? totalSeats : totalAC);
-
-  // Donut chart
+  renderTable(sorted);
   renderDonut(sorted);
-
-  // Vote share bars
   renderBars(sorted);
 }
 
 function renderMeter(sorted, totalAC, majorityMark) {
   const bar = document.getElementById('meterBar');
-  const majorityPct = (majorityMark / totalAC) * 100;
-  
-  // Set majority line position
-  document.getElementById('majorityLine').style.left = majorityPct + '%';
-
-  const totalInMeter = sorted.reduce((s,p) => s+p.total, 0) || 1;
-  
+  document.getElementById('majorityLine').style.left = ((majorityMark / totalAC) * 100) + '%';
+  const remaining = Math.max(0, totalAC - sorted.reduce((s,p)=>s+p.total,0));
   bar.innerHTML = sorted.map(p => {
     const { abbr } = getAbbr(p.party);
     const color = getColor(abbr);
@@ -958,56 +717,45 @@ function renderMeter(sorted, totalAC, majorityMark) {
     return `<div class="meter-segment" style="width:${pct}%;background:${color};">
       <span class="meter-segment-label">${pct > 5 ? abbr : ''}</span>
     </div>`;
-  }).join('') + `<div class="meter-segment" style="width:${Math.max(0,((totalAC - sorted.reduce((s,p)=>s+p.total,0))/totalAC)*100)}%;background:var(--surface2);opacity:0.3;"></div>`;
+  }).join('') + (remaining > 0
+    ? `<div class="meter-segment" style="width:${(remaining/totalAC)*100}%;background:var(--surface2);opacity:0.3;"></div>`
+    : '');
 }
 
 function renderPartyCards(sorted, majorityMark) {
-  const container = document.getElementById('partyCards');
-  container.innerHTML = sorted.map(p => {
-    const { abbr, cls } = getAbbr(p.party);
+  document.getElementById('partyCards').innerHTML = sorted.map(p => {
+    const { abbr, cls, extra } = getAbbr(p.party);
     const hasMajority = p.total >= majorityMark;
-    return `
-    <div class="party-card ${cls} updated">
-      ${hasMajority ? '<span class="majority-tag yes">✓ MAJORITY</span>' : ''}
+    return `<div class="party-card ${cls} ${extra || ''} updated">
+      ${hasMajority ? '<span class="majority-tag yes">\u2713 MAJORITY</span>' : ''}
       <div class="party-abbr">${abbr}</div>
       <div class="seat-count">${p.total}</div>
       <div class="breakdown">
-        <div class="breakdown-item">
-          <span class="label">WON</span>
-          <span class="val won">${p.won}</span>
-        </div>
-        <div class="breakdown-item">
-          <span class="label">LEAD</span>
-          <span class="val leading">${p.leading}</span>
-        </div>
+        <div class="breakdown-item"><span class="label">WON</span><span class="val won">${p.won}</span></div>
+        <div class="breakdown-item"><span class="label">LEAD</span><span class="val leading">${p.leading}</span></div>
       </div>
     </div>`;
   }).join('');
 }
 
-function renderTable(sorted, totalCount) {
-  const tbody = document.getElementById('resultsTableBody');
-  const totalWon = sorted.reduce((s,p) => s+p.won, 0);
-  const totalLeading = sorted.reduce((s,p) => s+p.leading, 0);
-  const grandTotal = sorted.reduce((s,p) => s+p.total, 0);
-
-  tbody.innerHTML = sorted.map(p => {
+function renderTable(sorted) {
+  const totalWon     = sorted.reduce((s,p)=>s+p.won,0);
+  const totalLeading = sorted.reduce((s,p)=>s+p.leading,0);
+  const grandTotal   = sorted.reduce((s,p)=>s+p.total,0);
+  document.getElementById('resultsTableBody').innerHTML = sorted.map(p => {
     const { abbr } = getAbbr(p.party);
     const color = getColor(abbr);
-    const shortName = p.party.length > 32 ? p.party.substring(0, 32) + '…' : p.party;
+    const shortName = p.party.length > 34 ? p.party.substring(0, 34) + '\u2026' : p.party;
     return `<tr>
-      <td>
-        <div class="party-indicator">
-          <div class="party-dot" style="background:${color}"></div>
-          <span>${shortName}</span>
-        </div>
-      </td>
+      <td><div class="party-indicator">
+        <div class="party-dot" style="background:${color}"></div>
+        <span>${shortName}</span>
+      </div></td>
       <td class="won-val">${p.won}</td>
       <td class="leading-val">${p.leading}</td>
       <td class="total-val" style="font-weight:700">${p.total}</td>
     </tr>`;
-  }).join('') + `
-  <tr class="total-row">
+  }).join('') + `<tr class="total-row">
     <td>TOTAL</td>
     <td class="won-val">${totalWon}</td>
     <td class="leading-val">${totalLeading}</td>
@@ -1016,52 +764,39 @@ function renderTable(sorted, totalCount) {
 }
 
 function renderDonut(sorted) {
-  const svg = document.getElementById('donutSvg');
+  const svg    = document.getElementById('donutSvg');
   const legend = document.getElementById('donutLegend');
-  const total = sorted.reduce((s,p) => s+p.total, 0) || 1;
+  const total  = sorted.reduce((s,p)=>s+p.total,0) || 1;
   const cx = 100, cy = 100, r = 80, innerR = 50;
   const TAU = Math.PI * 2;
-  
-  let paths = '';
-  let startAngle = -Math.PI / 2;
-  
+  let paths = '', startAngle = -Math.PI / 2;
+
   sorted.forEach(p => {
     const { abbr } = getAbbr(p.party);
-    const color = getColor(abbr);
-    const angle = (p.total / total) * TAU;
+    const color    = getColor(abbr);
+    const angle    = (p.total / total) * TAU;
     const endAngle = startAngle + angle;
-    
-    const x1 = cx + r * Math.cos(startAngle);
-    const y1 = cy + r * Math.sin(startAngle);
-    const x2 = cx + r * Math.cos(endAngle);
-    const y2 = cy + r * Math.sin(endAngle);
-    const ix1 = cx + innerR * Math.cos(endAngle);
-    const iy1 = cy + innerR * Math.sin(endAngle);
-    const ix2 = cx + innerR * Math.cos(startAngle);
-    const iy2 = cy + innerR * Math.sin(startAngle);
-    
+    const x1 = cx + r*Math.cos(startAngle), y1 = cy + r*Math.sin(startAngle);
+    const x2 = cx + r*Math.cos(endAngle),   y2 = cy + r*Math.sin(endAngle);
+    const ix1 = cx + innerR*Math.cos(endAngle),   iy1 = cy + innerR*Math.sin(endAngle);
+    const ix2 = cx + innerR*Math.cos(startAngle), iy2 = cy + innerR*Math.sin(startAngle);
     const large = angle > Math.PI ? 1 : 0;
-    paths += `<path d="M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} L ${ix1} ${iy1} A ${innerR} ${innerR} 0 ${large} 0 ${ix2} ${iy2} Z" fill="${color}" opacity="0.9" stroke="var(--surface)" stroke-width="1.5">
-      <title>${abbr}: ${p.total} seats</title>
-    </path>`;
+    paths += `<path d="M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} L ${ix1} ${iy1} A ${innerR} ${innerR} 0 ${large} 0 ${ix2} ${iy2} Z" fill="${color}" opacity="0.9" stroke="var(--surface)" stroke-width="1.5"><title>${abbr}: ${p.total}</title></path>`;
     startAngle = endAngle;
   });
 
-  // Center text
   const topParty = sorted[0];
   const { abbr: topAbbr } = topParty ? getAbbr(topParty.party) : { abbr: '—' };
-
   svg.innerHTML = paths + `
-    <circle cx="${cx}" cy="${cy}" r="${innerR - 2}" fill="var(--surface)" />
-    <text x="${cx}" y="${cy - 8}" text-anchor="middle" font-family="Bebas Neue, sans-serif" font-size="24" fill="var(--text)">${topParty?.total || '—'}</text>
-    <text x="${cx}" y="${cy + 12}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--muted)" letter-spacing="1">${topAbbr}</text>
-    <text x="${cx}" y="${cy + 24}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="var(--muted)" letter-spacing="0.5">LEADING</text>
-  `;
+    <circle cx="${cx}" cy="${cy}" r="${innerR-2}" fill="var(--surface)" />
+    <text x="${cx}" y="${cy-8}"  text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="24" fill="var(--text)">${topParty?.total||'—'}</text>
+    <text x="${cx}" y="${cy+12}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted)" letter-spacing="1">${topAbbr}</text>
+    <text x="${cx}" y="${cy+24}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" fill="var(--muted)" letter-spacing="0.5">WINNER</text>`;
 
   legend.innerHTML = sorted.map(p => {
     const { abbr } = getAbbr(p.party);
     const color = getColor(abbr);
-    const pct = ((p.total / total) * 100).toFixed(1);
+    const pct   = ((p.total / total) * 100).toFixed(1);
     return `<div class="legend-item">
       <div class="legend-swatch" style="background:${color}"></div>
       <span class="legend-name">${abbr}</span>
@@ -1071,41 +806,42 @@ function renderDonut(sorted) {
 }
 
 function renderBars(sorted) {
-  const total = sorted.reduce((s,p) => s+p.total, 0) || 1;
-  const container = document.getElementById('voteShares');
-  container.innerHTML = sorted.map(p => {
+  const total = sorted.reduce((s,p)=>s+p.total,0) || 1;
+  document.getElementById('voteShares').innerHTML = sorted.map(p => {
     const { abbr } = getAbbr(p.party);
     const color = getColor(abbr);
-    const pct = ((p.total / total) * 100).toFixed(1);
-    const shortName = p.party.length > 40 ? abbr : p.party;
+    const pct   = ((p.total / total) * 100).toFixed(1);
+    const name  = p.party.length > 40 ? abbr : p.party;
     return `<div class="vote-row">
       <div class="vote-row-header">
-        <span class="party-name">${shortName}</span>
+        <span class="party-name">${name}</span>
         <span class="pct">${p.total} seats (${pct}%)</span>
       </div>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${pct}%;background:${color};"></div>
-      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"></div></div>
     </div>`;
   }).join('');
 }
 
-// Initial load
+// ── BOOT ───────────────────────────────────────────────────────────────────
+// Show final results immediately — no blank flash
+renderAll(FINAL_RESULTS);
+currentData = FINAL_RESULTS;
+
+// Then try live fetch silently in background
 fetchData();
 
 // Auto-refresh every 60 seconds
 setInterval(fetchData, 60000);
 
-
-// Countdown timer in footer
+// Countdown in footer
 let countdown = 60;
 setInterval(() => {
   countdown--;
   if (countdown <= 0) countdown = 60;
   const el = document.getElementById('footerTime');
   if (el && currentData) {
-    const fetchTime = new Date(currentData.fetchedAt);
-    el.textContent = `Last fetched: ${fetchTime.toLocaleString('en-IN')} · Next refresh in ${countdown}s`;
+    const ft = new Date(currentData.fetchedAt);
+    el.textContent = `Last fetched: ${ft.toLocaleString('en-IN')} \u00B7 Next refresh in ${countdown}s`;
   }
 }, 1000);
 </script>
